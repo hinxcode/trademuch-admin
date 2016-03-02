@@ -1,13 +1,11 @@
 package org.lightadmin.boot.domain;
 
 
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -29,41 +27,50 @@ public class User implements Serializable {
     @NotBlank
     private String username;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_favorite", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"))
+    private Set<Post> posts;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_place", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "place_id", referencedColumnName = "id"))
+    private Set<Place> places;
 
-    @Column(name = "last_name")
-    private String lastName;
+//    @Column(name = "full_name")
+//    private String fullName;
+//
+//    @Column(name = "first_name")
+//    private String firstName;
+//
+//    @Column(name = "last_name")
+//    private String lastName;
+//
+//    @Column(unique = true)
+//    private String email;
+//
+//    @Column
+//    private String telephone;
+//
+//    @Column(columnDefinition = "int(11) DEFAULT 0")
+//    private Integer age;
+//
+//    @Column(columnDefinition = "ENUM('none','male','female') DEFAULT 'none'")
+//    @Enumerated(EnumType.STRING)
+//    private Gender gender;
+//
+//    @Column(name = "is_first_login", columnDefinition = "tinyint(1) DEFAULT 1")
+//    @NotNull
+//    private Integer isFirstLogin;
+//
+//    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date createdAt;
+//
+//    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date updatedAt;
 
-    @Column(unique = true)
-    private String email;
-
-    @Column
-    private String telephone;
-
-    @Column(columnDefinition = "int(11) DEFAULT 0")
-    private Integer age;
-
-    @Column(columnDefinition = "ENUM('none','male','female') DEFAULT 'none'")
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
-    @Column(name = "is_first_login", columnDefinition = "tinyint(1) DEFAULT 1")
-    @NotNull
-    private Integer isFirstLogin;
-
-    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date updatedAt;
 
     public Integer getId() {
         return id;
@@ -89,83 +96,19 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getFullName() {
-        return fullName;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Set<Place> getPlaces() {
+        return places;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public Integer getIsFirstLogin() {
-        return isFirstLogin;
-    }
-
-    public void setIsFirstLogin(Integer isFirstLogin) {
-        this.isFirstLogin = isFirstLogin;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setPlaces(Set<Place> places) {
+        this.places = places;
     }
 }

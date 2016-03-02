@@ -49,9 +49,9 @@ public class Passport implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "passport_ibfk_1"))
-    private User userId;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "passport_ibfk_1"))
+//    private User userId;
 
     public Integer getId() {
         return id;
@@ -125,11 +125,11 @@ public class Passport implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
+//    public User getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(User userId) {
+//        this.userId = userId;
+//    }
 }

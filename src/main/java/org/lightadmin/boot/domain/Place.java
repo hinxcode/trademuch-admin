@@ -1,11 +1,9 @@
 package org.lightadmin.boot.domain;
 
 
-import org.hibernate.annotations.GenerationTime;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 
 
 @Entity
@@ -22,24 +20,30 @@ public class Place implements Serializable {
     @Column
     private String name;
 
-    @Column
-    private String address;
+//    @Column
+//    private String address;
+//
+//    @Column(columnDefinition = "DOUBLE DEFAULT null")
+//    private Double latitude;
+//
+//    @Column(columnDefinition = "DOUBLE DEFAULT null")
+//    private Double longitude;
+//
+//    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date createdAt;
+//
+//    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date updatedAt;
 
-    @Column(columnDefinition = "DOUBLE DEFAULT null")
-    private Double latitude;
+    @ManyToMany(mappedBy = "places")
+    private Set<Post> posts;
 
-    @Column(columnDefinition = "DOUBLE DEFAULT null")
-    private Double longitude;
-
-    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @ManyToMany(mappedBy = "places")
+    private Set<User> users;
 
     public Integer getId() {
         return id;
@@ -57,43 +61,19 @@ public class Place implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Set<Post> getPosts() {
+        return posts;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

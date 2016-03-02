@@ -1,13 +1,11 @@
 package org.lightadmin.boot.domain;
 
 
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -26,35 +24,40 @@ public class Post implements Serializable {
     private UUID uuid;
 
     @Column
-    @NotBlank
+//    @NotBlank
     private String title;
 
-    @Column(name = "start_date", columnDefinition = "datetime")
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date startDate;
+//    @Column(name = "start_date", columnDefinition = "datetime")
+//    @NotNull
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date startDate;
+//
+//    @Column(name = "end_date", columnDefinition = "datetime")
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date endDate;
+//
+//    @Column(name = "cover_image")
+//    private String coverImage;
+//
+//    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date createdAt;
+//
+//    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
+//    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+//    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+//    private Date updatedAt;
 
-    @Column(name = "end_date", columnDefinition = "datetime")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date endDate;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "post_ibfk_1"))
 
-    @Column(name = "cover_image")
-    private String coverImage;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "post_place", joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "place_id", referencedColumnName = "id"))
+    private Set<Place> places;
 
-    @Column(name = "created_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Column(name = "updated_at", insertable = false, updatable = false, columnDefinition = "datetime")
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "post_ibfk_1"))
-
-    private User userId;
+    @ManyToMany(mappedBy = "posts")
+    private Set<User> users;
 
     public Integer getId() {
         return id;
@@ -80,51 +83,19 @@ public class Post implements Serializable {
         this.title = title;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Set<Place> getPlaces() {
+        return places;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setPlaces(Set<Place> places) {
+        this.places = places;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

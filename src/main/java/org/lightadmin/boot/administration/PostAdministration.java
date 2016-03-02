@@ -14,17 +14,17 @@ public class PostAdministration extends AdministrationConfiguration<Post> {
         return configurationBuilder.build();
     }
 
-    public FieldSetConfigurationUnit formView(final PersistentFieldSetConfigurationUnitBuilder fragmentBuilder) {
-
-        return fragmentBuilder
-                .field("uuid").caption("UUID")
-                .field("title").caption("Title")
-                .field("startDate").caption("Start Date")
-                .field("endDate").caption("End Date")
-                .field("coverImage").caption("Cover Image")
-                .field("createdAt").caption("Created At")
-                .field("updatedAt").caption("Updated At")
-                .field("userId").caption("User")
-                .build();
-    }
+//    public FieldSetConfigurationUnit formView(final PersistentFieldSetConfigurationUnitBuilder fragmentBuilder) {
+//
+//        return fragmentBuilder
+//                .field("uuid").caption("UUID")
+//                .field("title").caption("Title")
+//                .field("startDate").caption("Start Date")
+//                .field("endDate").caption("End Date")
+//                .field("coverImage").caption("Cover Image")
+//                .field("createdAt").caption("Created At")
+//                .field("updatedAt").caption("Updated At")
+//                .field("userId").caption("User")
+//                .build();
+//    }
 }
